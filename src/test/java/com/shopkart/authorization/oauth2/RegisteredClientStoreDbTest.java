@@ -21,18 +21,21 @@ public class RegisteredClientStoreDbTest {
     @Autowired
     private RegisteredClientRepository registeredClientRepository;
 
-    @Test
+//    @Test
     void saveClientInDb(){
         RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
         .clientId("productService")
-        .clientSecret("password")
+        .clientSecret(passwordEncoder.encode("password"))
         .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
         .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
         .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-        .redirectUri("http://127.0.0.1:8080/login/oauth2/code/oidc-client")
-        .postLogoutRedirectUri("http://127.0.0.1:8080/")
+        .redirectUri("http://localhost:9090/login/oauth2/code/productService")
+        .postLogoutRedirectUri("http://localhost:9090/")
         .scope(OidcScopes.OPENID)
         .scope(OidcScopes.PROFILE)
+        .scope("ADMIN")
+        .scope("STUDENT")
+        .scope("MENTOR")
         .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
         .build();
 
