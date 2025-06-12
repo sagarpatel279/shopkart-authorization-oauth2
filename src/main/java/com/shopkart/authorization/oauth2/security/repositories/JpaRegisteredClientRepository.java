@@ -157,4 +157,8 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
 		}
 		return new ClientAuthenticationMethod(clientAuthenticationMethod);      // Custom client authentication method
 	}
+
+	public boolean existsByClientId(String clientId) {
+		return this.clientRepository.existsByClientId(clientId);
+	}
 }

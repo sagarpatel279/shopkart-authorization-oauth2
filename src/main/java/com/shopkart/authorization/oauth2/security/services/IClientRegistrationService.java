@@ -1,9 +1,9 @@
 package com.shopkart.authorization.oauth2.security.services;
 
-import com.shopkart.authorization.oauth2.security.models.Client;
+import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 
 public interface IClientRegistrationService {
-    void createClient(Client client);
-    Client findById(String id);
-    Client findByClientId(String clientId);
+    void createClient(RegisteredClient registeredClient);
+    RegisteredClient findById(String id);
+    RegisteredClient findByClientId(String clientId);
 }

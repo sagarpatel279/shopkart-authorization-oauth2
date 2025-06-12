@@ -1,34 +1,34 @@
 package com.shopkart.authorization.oauth2.security.records;
 import com.shopkart.authorization.oauth2.security.models.Client;
+import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 
 import java.time.Instant;
+import java.util.Set;
+import java.util.UUID;
 
 public record ClientRegistrationRequestRecord(
         String clientId,
-        Instant clientIdIssuedAt,
         String clientSecret,
-        Instant clientSecretExpiresAt,
         String clientName,
-        String clientAuthenticationMethods,
-        String authorizationGrantTypes,
-        String redirectUris,
-        String postLogoutRedirectUris,
-        String scopes,
-        String clientSettings,
-        String tokenSettings){
-    public Client from(ClientRegistrationRequestRecord record){
-        Client client=new Client();
-        client.setClientId(record.clientId);
-        client.setClientIdIssuedAt(record.clientIdIssuedAt);
-        client.setClientName(record.clientName);
-        client.setClientSecret(record.clientSecret);
-        client.setClientSecretExpiresAt(record.clientSecretExpiresAt);
-        client.setClientAuthenticationMethods();
-        client.setAuthorizationGrantTypes();
-        client.setRedirectUris();
-        client.setPostLogoutRedirectUris();
-        client.setScopes();
-        client.setClientSettings();
-        client.setTokenSettings();
+        Set<String> redirectUris,
+        Set<String> postLogoutRedirectUris,
+        Set<String> scopes){
+    public static RegisteredClient from(ClientRegistrationRequestRecord record){
+        return RegisteredClient.withId(UUID.randomUUID().toString())
+                .clientId(record.clientId)
+        .clientName(record.clientName)
+        .clientSecret(record.clientSecret)
+        .redirectUris(uris->uris.addAll(record.redirectUris))
+        .postLogoutRedirectUris(uris->uris.addAll(record.postLogoutRedirectUris))
+        .scopes(scops->scops.addAll(record.scopes)).build();
     }
 }
+
+//{
+//        "clientId":"",
+//        "clientSecret":"",
+//        "clientName":"",
+//        "redirectUris":{"":""},
+//        "postLogoutRedirectUris":{"":""},
+//        "scopes":{"":""}
+//}

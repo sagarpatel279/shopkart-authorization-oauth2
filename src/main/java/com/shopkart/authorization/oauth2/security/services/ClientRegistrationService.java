@@ -1,30 +1,47 @@
 package com.shopkart.authorization.oauth2.security.services;
 
-import com.shopkart.authorization.oauth2.security.models.Client;
+import com.shopkart.authorization.oauth2.security.repositories.JpaRegisteredClientRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.core.AuthorizationGrantType;
+import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
+import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
+import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ClientRegistrationService implements IClientRegistrationService{
 
     private PasswordEncoder passwordEncoder;
-
-    public ClientRegistrationService(PasswordEncoder passwordEncoder){
+    private JpaRegisteredClientRepository jpaRegisteredClientRepository;
+    public ClientRegistrationService(PasswordEncoder passwordEncoder,
+                                     JpaRegisteredClientRepository jpaRegisteredClientRepository){
         this.passwordEncoder=passwordEncoder;
+        this.jpaRegisteredClientRepository=jpaRegisteredClientRepository;
     }
 
     @Override
-    public void createClient(Client client) {
-
+    public void createClient(RegisteredClient registeredClient) {
+        boolean isClientExist=jpaRegisteredClientRepository.existsByClientId(registeredClient.getClientId());
+        jpaRegisteredClientRepository.save(from(registeredClient));
     }
 
     @Override
-    public Client findById(String id) {
-        return null;
+    public RegisteredClient findById(String id) {
+        return jpaRegisteredClientRepository.findById(id);
     }
 
     @Override
-    public Client findByClientId(String clientId) {
-        return null;
+    public RegisteredClient findByClientId(String clientId) {
+        return jpaRegisteredClientRepository.findByClientId(clientId);
+    }
+
+    private RegisteredClient from(RegisteredClient registeredClient){
+        return RegisteredClient.from(registeredClient)
+                .clientSecret(passwordEncoder.encode(registeredClient.getClientSecret()))
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
+                .build();
     }
 }
