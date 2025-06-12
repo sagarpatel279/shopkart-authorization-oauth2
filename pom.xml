@@ -78,6 +78,16 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-authorization-server</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.codingapi.security/springboot-starter-security-jwt -->
+        <dependency>
+            <groupId>com.codingapi.security</groupId>
+            <artifactId>springboot-starter-security-jwt</artifactId>
+            <version>0.0.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

@@ -64,6 +64,7 @@ public class SecurityConfiguration {
                                 .oidc(Customizer.withDefaults())	// Enable OpenID Connect 1.0
                 )
                 .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/auth/signup").permitAll()
                         .anyRequest().authenticated())
 
                 .exceptionHandling((exceptions) -> exceptions
@@ -83,6 +84,7 @@ public class SecurityConfiguration {
         http
 
                 .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/auth/signup").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf().disable()

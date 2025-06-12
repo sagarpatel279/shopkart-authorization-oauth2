@@ -1,5 +1,6 @@
 package com.shopkart.authorization.oauth2.models;
 
+import com.shopkart.authorization.oauth2.dtos.UserRecord;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
@@ -18,4 +19,7 @@ public class User extends BaseModel{
     @ManyToMany
     private Set<Role> roles;
 
+    public static UserRecord toUserRecord(User user){
+        return new UserRecord(user.getId(),user.getEmail(),Role.toStrings(user.getRoles()));
+    }
 }

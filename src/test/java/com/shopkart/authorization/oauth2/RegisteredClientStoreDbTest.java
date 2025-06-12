@@ -11,6 +11,8 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @SpringBootTest
@@ -23,13 +25,16 @@ public class RegisteredClientStoreDbTest {
 
 //    @Test
     void saveClientInDb(){
+        Set<String> redirectUirsSet=new HashSet<>();
+        redirectUirsSet.add("http://localhost:9090/login/oauth2/code/productService");
+        redirectUirsSet.add("https://oauth.pstmn.io/v1/callback");
         RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
         .clientId("productService")
         .clientSecret(passwordEncoder.encode("password"))
         .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
         .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
         .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-        .redirectUri("http://localhost:9090/login/oauth2/code/productService")
+        .redirectUris(strings -> strings.addAll(redirectUirsSet))
         .postLogoutRedirectUri("http://localhost:9090/")
         .scope(OidcScopes.OPENID)
         .scope(OidcScopes.PROFILE)
