@@ -1,4 +1,4 @@
-package com.shopkart.authorization.oauth2.security.services;
+package com.shopkart.authorization.oauth2.security.repositories;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,6 @@ import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.shopkart.authorization.oauth2.security.models.Client;
-import com.shopkart.authorization.oauth2.security.repositories.ClientRepository;
 import org.springframework.security.jackson2.SecurityJackson2Modules;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;

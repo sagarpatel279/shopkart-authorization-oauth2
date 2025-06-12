@@ -3,6 +3,7 @@ package com.shopkart.authorization.oauth2.models;
 import com.shopkart.authorization.oauth2.dtos.UserRecord;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +17,7 @@ public class User extends BaseModel{
     @Column(unique = true)
     private String email;
     private String passwordSalt;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
     public static UserRecord toUserRecord(User user){

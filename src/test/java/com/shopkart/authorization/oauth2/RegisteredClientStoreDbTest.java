@@ -28,6 +28,7 @@ public class RegisteredClientStoreDbTest {
         Set<String> redirectUirsSet=new HashSet<>();
         redirectUirsSet.add("http://localhost:9090/login/oauth2/code/productService");
         redirectUirsSet.add("https://oauth.pstmn.io/v1/callback");
+
         RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
         .clientId("productService")
         .clientSecret(passwordEncoder.encode("password"))

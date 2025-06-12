@@ -27,7 +27,7 @@ public class AuthenticationController {
     }
     @PostMapping("/login")
     public ResponseEntity<?> doLogin() {
-        return null;
+        return ResponseEntity.ok("Welcome to Shop Kart...!");
     }
 
     @PostMapping("/logout")
