@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @JsonDeserialize
 @NoArgsConstructor
 public class CustomUserDetails implements UserDetails {
+    private Long userId;
     private String username;
     private String password;
     private Set<? extends GrantedAuthority> authorities;
@@ -22,12 +23,18 @@ public class CustomUserDetails implements UserDetails {
     private boolean credentialsNonExpired=true;
     private boolean enabled=true;
 
+
+    public Long getUserId() {
+        return userId;
+    }
+
     public CustomUserDetails(User user){
         this.username=user.getEmail();
         this.password=user.getPasswordSalt();
         this.authorities=user.getRoles()
                 .stream().map(CustomGrantedAuthorities::new)
                 .collect(Collectors.toCollection(HashSet::new));
+        this.userId=user.getId();
     }
 
     @Override
@@ -64,4 +71,5 @@ public class CustomUserDetails implements UserDetails {
     public boolean isEnabled() {
         return this.enabled;
     }
+
 }
