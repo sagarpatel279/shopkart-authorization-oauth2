@@ -1,5 +1,6 @@
 package com.shopkart.authorization.oauth2.security.services;
 
+import com.shopkart.authorization.oauth2.security.exceptions.ClientAlreadyExistException;
 import com.shopkart.authorization.oauth2.security.repositories.JpaRegisteredClientRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
@@ -22,6 +23,9 @@ public class ClientRegistrationService implements IClientRegistrationService{
     @Override
     public void createClient(RegisteredClient registeredClient) {
         boolean isClientExist=jpaRegisteredClientRepository.existsByClientId(registeredClient.getClientId());
+        if(isClientExist)
+            throw new ClientAlreadyExistException("Client already exists with client id: "+registeredClient.getClientId());
+
         jpaRegisteredClientRepository.save(from(registeredClient));
     }
 
