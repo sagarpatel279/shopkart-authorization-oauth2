@@ -59,6 +59,7 @@ public class SecurityConfiguration {
                 )
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/auth/signup").permitAll()
+                        .requestMatchers("/client").permitAll()
                         .anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
@@ -81,6 +82,7 @@ public class SecurityConfiguration {
 
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/auth/signup").permitAll()
+                        .requestMatchers("/client").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf(AbstractHttpConfigurer::disable)

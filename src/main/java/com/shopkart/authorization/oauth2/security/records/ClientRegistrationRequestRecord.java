@@ -1,5 +1,10 @@
 package com.shopkart.authorization.oauth2.security.records;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.core.AuthorizationGrantType;
+import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
+import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 
 import java.util.Set;
 import java.util.UUID;
@@ -11,15 +16,7 @@ public record ClientRegistrationRequestRecord(
         Set<String> redirectUris,
         Set<String> postLogoutRedirectUris,
         Set<String> scopes){
-    public static RegisteredClient from(ClientRegistrationRequestRecord record){
-        return RegisteredClient.withId(UUID.randomUUID().toString())
-                .clientId(record.clientId)
-        .clientName(record.clientName)
-        .clientSecret(record.clientSecret)
-        .redirectUris(uris->uris.addAll(record.redirectUris))
-        .postLogoutRedirectUris(uris->uris.addAll(record.postLogoutRedirectUris))
-        .scopes(scops->scops.addAll(record.scopes)).build();
-    }
+
 }
 
 //{

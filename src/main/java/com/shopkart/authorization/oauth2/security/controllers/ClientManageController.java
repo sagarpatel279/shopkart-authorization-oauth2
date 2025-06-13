@@ -18,7 +18,7 @@ public class ClientManageController {
     }
     @PostMapping()
     public ResponseEntity<?> createClient(@RequestBody ClientRegistrationRequestRecord clientRegistrationRequestRecord){
-        clientRegistrationService.createClient(ClientRegistrationRequestRecord.from(clientRegistrationRequestRecord));
+        clientRegistrationService.createClient(clientRegistrationRequestRecord);
         return ResponseEntity.ok("Client registered successfully");
     }
 
