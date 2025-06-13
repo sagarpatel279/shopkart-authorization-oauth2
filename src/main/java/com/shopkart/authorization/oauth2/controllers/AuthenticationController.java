@@ -25,7 +25,7 @@ public class AuthenticationController {
                 "User has registered successfully", HttpStatus.CREATED.value());
         return new ResponseEntity<>(apiResponse,HttpStatus.CREATED);
     }
-    @PostMapping("/login")
+    @PostMapping("/loginxyz")
     public ResponseEntity<?> doLogin() {
         return ResponseEntity.ok("Welcome to Shop Kart...!");
     }
