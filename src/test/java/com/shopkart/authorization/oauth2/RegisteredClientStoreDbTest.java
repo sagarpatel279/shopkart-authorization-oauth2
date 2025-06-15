@@ -1,6 +1,6 @@
 package com.shopkart.authorization.oauth2;
 
-import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,27 +24,27 @@ public class RegisteredClientStoreDbTest {
     private RegisteredClientRepository registeredClientRepository;
 
 //    @Test
-    void saveClientInDb(){
-        Set<String> redirectUirsSet=new HashSet<>();
-        redirectUirsSet.add("http://localhost:9090/login/oauth2/code/productService");
-        redirectUirsSet.add("https://oauth.pstmn.io/v1/callback");
-
-        RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
-        .clientId("productService")
-        .clientSecret(passwordEncoder.encode("password"))
-        .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-        .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-        .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-        .redirectUris(strings -> strings.addAll(redirectUirsSet))
-        .postLogoutRedirectUri("http://localhost:9090/")
-        .scope(OidcScopes.OPENID)
-        .scope(OidcScopes.PROFILE)
-        .scope("ADMIN")
-        .scope("STUDENT")
-        .scope("MENTOR")
-        .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
-        .build();
-
-        registeredClientRepository.save(oidcClient);
-    }
+//    void saveClientInDb(){
+//        Set<String> redirectUirsSet=new HashSet<>();
+//        redirectUirsSet.add("http://localhost:9090/login/oauth2/code/productService");
+//        redirectUirsSet.add("https://oauth.pstmn.io/v1/callback");
+//
+//        RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
+//        .clientId("productService")
+//        .clientSecret(passwordEncoder.encode("password"))
+//        .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+//        .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+//        .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+//        .redirectUris(strings -> strings.addAll(redirectUirsSet))
+//        .postLogoutRedirectUri("http://localhost:9090/")
+//        .scope(OidcScopes.OPENID)
+//        .scope(OidcScopes.PROFILE)
+//        .scope("ADMIN")
+//        .scope("STUDENT")
+//        .scope("MENTOR")
+//        .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
+//        .build();
+//
+//        registeredClientRepository.save(oidcClient);
+//    }
 }

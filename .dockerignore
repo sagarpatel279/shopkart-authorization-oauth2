@@ -1,0 +1,44 @@
+# Maven
+target/
+!target/*.jar
+*.class
+*.jar
+*.war
+*.ear
+*.logs
+*.iml
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.ipr
+
+# VS Code
+.vscode/
+
+# Logs
+logs/
+*.log
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Node
+node_modules/
+npm-debug.log
+
+# Misc
+*.swp
+*.bak
+*.tmp
+*.orig
